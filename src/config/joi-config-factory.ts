@@ -14,6 +14,9 @@ export const joiConfigFactory = () => ({
     DB_PASSWORD: Joi.string().required(),
     DB_AUTH_SOURCE: Joi.string().required(),
     DB_FILES_COLLECTION_PREFIX: Joi.string().required(),
+    HASH_ROUNDS: Joi.number().required(),
+    JWT_SECRET: Joi.string().required(),
+    JWT_EXPIRATION_TIME: Joi.string().required(),
   }),
   validationOptions: {
     allowUnknown: true,

@@ -2,10 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
-import { joiConfigFactory, mongooseConfigFactory } from 'src/config';
-import { FilesModule } from 'src/modules/files';
+import { joiConfigFactory, mongooseConfigFactory } from './config';
+import { AuthController, AuthModule, FilesModule, UserModule, UserRouteController } from './modules';
 
 @Module({
   imports: [
@@ -15,8 +13,10 @@ import { FilesModule } from 'src/modules/files';
     }),
     ConfigModule.forRoot(joiConfigFactory()),
     FilesModule,
+    AuthModule,
+    UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AuthController, UserRouteController],
+  providers: [],
 })
 export class AppModule {}
