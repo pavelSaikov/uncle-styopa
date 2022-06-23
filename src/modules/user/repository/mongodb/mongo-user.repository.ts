@@ -12,7 +12,7 @@ export class MongoUserRepository extends UserRepository {
 
   addUser(user: AddUserDto): Promise<string> {
     const newUser = new this.userModel(user);
-    return newUser.save().then(({ _id }) => _id);
+    return newUser.save().then(({ _id }) => _id.toString());
   }
 
   async getUserById(id: string): Promise<UserDocument> {
