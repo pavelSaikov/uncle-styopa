@@ -1,0 +1,93 @@
+name: NodeJS with Nest
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+env:
+  NODE_ENV: test
+  PORT: 3000
+  DB_PORT: 27017
+  DB_DATABASE: test
+  DB_HOST: localhost
+  DB_USERNAME: mongoadmin
+  DB_PASSWORD: secret
+  DB_AUTH_SOURCE: admin
+  DB_FILES_COLLECTION_PREFIX: fs
+  PHOTOS_FORM_KEY: photos
+  CI: true
+  HASH_ROUNDS: 10
+  JWT_SECRET: secret
+  JWT_EXPIRATION_TIME: 10m
+
+
+jobs:
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v3
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+        
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: npm ci
+
+    - name: Lint Code
+      run: | 
+        npm run lint
+  
+  build:
+    needs: [lint]
+    name: Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v3
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+        
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: npm ci
+    
+    - name: Build App
+      run: | 
+        npm run build    
+
+    
+  
+  
+    
