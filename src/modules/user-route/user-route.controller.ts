@@ -9,7 +9,7 @@ import { UserService } from 'src/modules/user';
 export class UserRouteController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('signup')
   addUser(@Body() addUserDto: AddUserDto) {
     return this.userService.addUser(addUserDto);
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectConnection } from '@nestjs/mongoose';
-import { GridFSBucket, GridFSBucketReadStream, ObjectId, GridFSFile } from 'mongodb';
+import { GridFSBucket, GridFSBucketReadStream, GridFSFile, ObjectId } from 'mongodb';
 import { Connection } from 'mongoose';
 
 import { EnvVariable } from 'src/models';

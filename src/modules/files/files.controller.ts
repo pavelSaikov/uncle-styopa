@@ -12,14 +12,14 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { GridFSFile } from 'mongodb';
 
-import { FilesService } from 'src/modules/files/files.service';
+import { FilesService } from './files.service';
 
 @Controller('/files')
 export class FilesController {
   constructor(private filesService: FilesService) {}
 
   @Post('')
-  @UseInterceptors(FilesInterceptor('file'))
+  @UseInterceptors(FilesInterceptor(process.env.PHOTOS_FORM_KEY))
   upload(@UploadedFiles() files) {
     return files;
   }

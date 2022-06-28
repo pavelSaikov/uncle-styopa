@@ -3,7 +3,16 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { joiConfigFactory, mongooseConfigFactory } from './config';
-import { AuthController, AuthModule, FilesModule, UserModule, UserRouteController } from './modules';
+import {
+  AddressModule,
+  AuthController,
+  AuthModule,
+  FilesModule,
+  PetitionController,
+  PetitionModule,
+  UserModule,
+  UserRouteController,
+} from './modules';
 
 @Module({
   imports: [
@@ -15,8 +24,10 @@ import { AuthController, AuthModule, FilesModule, UserModule, UserRouteControlle
     FilesModule,
     AuthModule,
     UserModule,
+    AddressModule,
+    PetitionModule,
   ],
-  controllers: [AuthController, UserRouteController],
+  controllers: [AuthController, UserRouteController, PetitionController],
   providers: [],
 })
 export class AppModule {}

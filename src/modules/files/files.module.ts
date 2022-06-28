@@ -12,6 +12,7 @@ import { FilesService } from './files.service';
     }),
   ],
   controllers: [FilesController],
+  exports: [FilesService],
   providers: [GridFsMulterConfigService, FilesService],
 })
 export class FilesModule {}
