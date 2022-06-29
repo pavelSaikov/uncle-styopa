@@ -1,8 +1,9 @@
 import { IsString, MaxLength, MinLength } from 'class-validator';
 
+import { AddUserAddressDto } from '../address';
 import { IUser } from './IUser';
 
-export class AddUserDto implements Omit<IUser, 'id'> {
+export class AddUserDto implements Omit<IUser, 'id' | 'address'> {
   @IsString()
   email: string;
 
@@ -19,4 +20,6 @@ export class AddUserDto implements Omit<IUser, 'id'> {
 
   @IsString()
   patronymic: string;
+
+  address: AddUserAddressDto;
 }

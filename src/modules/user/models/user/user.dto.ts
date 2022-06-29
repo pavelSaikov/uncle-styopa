@@ -1,6 +1,7 @@
 import { Expose, Transform, Type } from 'class-transformer';
 import { ObjectId } from 'mongoose';
 
+import { IAddress } from '../address';
 import { IUser } from './IUser';
 
 export class UserDto implements Omit<IUser, 'password'> {
@@ -22,4 +23,7 @@ export class UserDto implements Omit<IUser, 'password'> {
   patronymic: string;
 
   id: string;
+
+  @Expose()
+  address: IAddress;
 }
