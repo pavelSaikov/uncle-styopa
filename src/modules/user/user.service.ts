@@ -27,10 +27,16 @@ export class UserService {
     return bcrypt.compare(password, originalPassword);
   }
 
-  async checkUserExistence(id: string, email: string): Promise<boolean> {
+  async checkUserExistenceByIdAndEmail(id: string, email: string): Promise<boolean> {
     const user = await this.userRepository.getUserById(id);
 
     return user && user.email === email;
+  }
+
+  async checkUserExistenceByEmail(email: string) {
+    const user = await this.userRepository.getUserByEmail(email);
+
+    return !!user;
   }
 
   private hashPassword(originalPassword: string): Promise<string> {
