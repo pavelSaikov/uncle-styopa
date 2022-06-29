@@ -1,3 +1,5 @@
+import { IAddress } from '../address';
+
 export interface IUser {
   id: string;
   email: string;
@@ -5,4 +7,5 @@ export interface IUser {
   firstName: string;
   secondName: string;
   patronymic: string;
+  address: IAddress;
 }

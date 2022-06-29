@@ -3,7 +3,7 @@ import { Body, Controller, Get, Param, Post, UseGuards, UsePipes } from '@nestjs
 import { Serialize } from 'src/interceptors';
 import { JwtAuthGuard } from 'src/modules/auth';
 import { UserService } from 'src/modules/user';
-import { AddUserDto, UserDto } from 'src/modules/user/models';
+import { AddUserAddressDto, AddUserDto, UserDto } from 'src/modules/user/models';
 import { CheckUserExistencePipe } from './pipes';
 
 @Controller('/user')
@@ -12,8 +12,8 @@ export class UserRouteController {
 
   @Post('signup')
   @UsePipes(CheckUserExistencePipe)
-  addUser(@Body() addUserDto: AddUserDto) {
-    return this.userService.addUser(addUserDto);
+  addUser(@Body() addUserDto: AddUserDto, @Body('address') addUserAddressDto: AddUserAddressDto) {
+    return this.userService.addUser({ ...addUserDto, address: addUserAddressDto });
   }
 
   @Get('/:id')

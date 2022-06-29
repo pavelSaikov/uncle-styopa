@@ -1,11 +1,8 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-import { IAddress } from './IAdress';
+import { IAddress } from './IAddress';
 
-export class AddAddressDto implements Omit<IAddress, 'id'> {
-  @IsString()
-  userId: string;
-
+export class AddUserAddressDto implements IAddress {
   @IsString()
   city: string;
 
@@ -18,4 +15,10 @@ export class AddAddressDto implements Omit<IAddress, 'id'> {
   @IsOptional()
   @IsNumber()
   pavilion?: number;
+
+  @IsNumber()
+  flatNumber: number;
+
+  @IsNumber()
+  mailIndex: number;
 }

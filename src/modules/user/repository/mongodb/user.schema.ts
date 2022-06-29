@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-import { IUser } from 'src/modules/user/models';
+import { AddressSchema } from './address.schema';
+import { IAddress, IUser } from 'src/modules/user/models';
 
 export type UserDocument = User & Document & { id: string };
 
@@ -21,6 +22,9 @@ export class User implements Omit<IUser, 'id'> {
 
   @Prop()
   patronymic: string;
+
+  @Prop({ type: AddressSchema })
+  address: IAddress;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
