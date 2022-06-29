@@ -15,19 +15,23 @@ export class MongoUserRepository extends UserRepository {
     return newUser.save().then(({ _id }) => _id.toString());
   }
 
-  async getUserById(id: string): Promise<UserDocument> {
+  async getUserById(id: string): Promise<UserDocument | undefined> {
     const mongoUser = await this.userModel.findById(id).exec();
 
     return this.assignIdField(mongoUser);
   }
 
-  async getUserByEmail(email: string): Promise<UserDocument> {
+  async getUserByEmail(email: string): Promise<UserDocument | undefined> {
     const mongoUser = await this.userModel.findOne({ email }).exec();
 
     return this.assignIdField(mongoUser);
   }
 
   private assignIdField(mongoUser: Omit<UserDocument, 'id'>) {
+    if (!mongoUser) {
+      return undefined;
+    }
+
     return Object.assign(mongoUser, { id: mongoUser._id.toString() });
   }
 }
