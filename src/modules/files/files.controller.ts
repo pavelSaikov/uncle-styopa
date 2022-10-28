@@ -19,7 +19,7 @@ export class FilesController {
   constructor(private filesService: FilesService) {}
 
   @Post('')
-  @UseInterceptors(FilesInterceptor(process.env.PHOTOS_FORM_KEY))
+  @UseInterceptors(FilesInterceptor('photos'))
   upload(@UploadedFiles() files) {
     return files;
   }

@@ -1,7 +1,7 @@
 import { IPetition } from '../models';
 
 export abstract class PetitionRepository {
-  abstract addPetition(petition: any): Promise<any>;
+  abstract addPetition(petition: Omit<IPetition, 'id'>): Promise<any>;
 
   abstract getPetitionsByUserId(userId: string): Promise<IPetition[]>;
 

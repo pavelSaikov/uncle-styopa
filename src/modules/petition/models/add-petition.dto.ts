@@ -3,7 +3,7 @@ import { IsArray, IsDateString, IsMongoId, MaxLength, MinLength } from 'class-va
 
 import { IPetition } from './IPetition';
 
-export class AddPetitionDto implements Omit<IPetition, 'id'> {
+export class AddPetitionDto implements Omit<IPetition, 'id' | 'petitionStatus'> {
   @Expose()
   @IsArray()
   @MinLength(1)
